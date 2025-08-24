@@ -8,16 +8,22 @@ import hello.core.member.MemberServiceImpl
 import hello.core.member.MemoryMemberRepository
 import hello.core.order.OrderService
 import hello.core.order.OrderServiceImpl
+import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.Configuration
 
 // 객체 생성과 연결(주입)을 담당
+@Configuration
 class AppConfig {
 
-    // 생성자 주입
+    @Bean
     fun memberService(): MemberService = MemberServiceImpl(memberRepository())
 
-    private fun memberRepository(): MemberRepository = MemoryMemberRepository()
+    @Bean
+    fun memberRepository(): MemberRepository = MemoryMemberRepository()
 
+    @Bean
     fun orderService(): OrderService = OrderServiceImpl(memberRepository(), discountPolicy())
 
-    private fun discountPolicy(): DiscountPolicy = FixDiscountPolicy()
+    @Bean
+    fun discountPolicy(): DiscountPolicy = FixDiscountPolicy()
 }
