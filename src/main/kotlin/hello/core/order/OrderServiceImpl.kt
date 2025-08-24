@@ -1,12 +1,12 @@
 package hello.core.order
 
-import hello.core.discount.RateDiscountPolicy
-import hello.core.member.MemoryMemberRepository
+import hello.core.discount.DiscountPolicy
+import hello.core.member.MemberRepository
 
-class OrderServiceImpl : OrderService {
-
-    private val memberRepository = MemoryMemberRepository()
-    private val discountPolicy = RateDiscountPolicy()
+class OrderServiceImpl(
+    private val memberRepository: MemberRepository,
+    private val discountPolicy: DiscountPolicy,
+) : OrderService {
 
     override fun createOrder(memberId: Long, itemName: String, itemPrice: Int): Order {
         val member = memberRepository.findById(memberId)

@@ -1,11 +1,12 @@
 package hello.core.member
 
+import hello.core.AppConfig
 import org.assertj.core.api.Assertions
 import org.junit.jupiter.api.Test
 
 class MemberServiceTest {
 
-    private val memberService: MemberService = MemberServiceImpl()
+    private val memberService: MemberService = AppConfig().memberService()
 
     @Test
     fun join() {
