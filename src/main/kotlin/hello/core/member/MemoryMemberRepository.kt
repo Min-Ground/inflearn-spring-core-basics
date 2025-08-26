@@ -1,5 +1,8 @@
 package hello.core.member
 
+import org.springframework.stereotype.Component
+
+@Component
 class MemoryMemberRepository : MemberRepository {
 
     override fun save(member: Member) {

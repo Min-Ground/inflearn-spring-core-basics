@@ -1,5 +1,8 @@
 package hello.core.member
 
+import org.springframework.stereotype.Component
+
+@Component
 class MemberServiceImpl(
     // 구현 클래스를 해당 클래스에서 주입하지 않고, AppConfig에서 주입한다
     // 구현 클래스의 코드가 더 이상 존재하지 않는다. (의존 X)
