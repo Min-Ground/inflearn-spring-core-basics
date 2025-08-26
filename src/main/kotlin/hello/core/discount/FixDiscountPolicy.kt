@@ -2,11 +2,12 @@ package hello.core.discount
 
 import hello.core.member.Grade
 import hello.core.member.Member
-import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.context.annotation.Primary
 import org.springframework.stereotype.Component
 
 // @Qualifier의 value는 빈 이름을 바꾸는 게 아니다. 단순 빈을 찾을 떄 사용하는 메타 데이터
-@Qualifier("mainDiscountPolicy")
+// @Qualifier("mainDiscountPolicy")
+@Primary // 우선순위 설정
 @Component
 class FixDiscountPolicy: DiscountPolicy {
 
