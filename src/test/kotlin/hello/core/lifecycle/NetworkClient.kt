@@ -1,15 +1,20 @@
 package hello.core.lifecycle
 
+import jakarta.annotation.PostConstruct
+import jakarta.annotation.PreDestroy
+
 class NetworkClient {
 
     lateinit var url: String
 
+    @PostConstruct
     fun init() {
         println("NetworkClient.init")
         connect()
         call("초기화 연결 메시지")
     }
 
+    @PreDestroy
     fun close() {
         println("NetworkClient.close")
         disconnect()
