@@ -17,7 +17,7 @@ class BeanLifeCycleTest {
     @Configuration
     class LifeCycleConfig {
 
-        @Bean
+        @Bean(initMethod = "init", destroyMethod = "close")
         fun networkClient(): NetworkClient {
             val networkClient = NetworkClient()
             networkClient.url = "http://127.0.0.1:8080"

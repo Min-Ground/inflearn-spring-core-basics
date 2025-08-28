@@ -1,14 +1,18 @@
 package hello.core.lifecycle
 
-import org.springframework.beans.factory.DisposableBean
-import org.springframework.beans.factory.InitializingBean
-
-class NetworkClient : InitializingBean, DisposableBean {
+class NetworkClient {
 
     lateinit var url: String
 
-    init {
-        println("생성자 호출")
+    fun init() {
+        println("NetworkClient.init")
+        connect()
+        call("초기화 연결 메시지")
+    }
+
+    fun close() {
+        println("NetworkClient.close")
+        disconnect()
     }
 
     fun connect() {
@@ -21,14 +25,5 @@ class NetworkClient : InitializingBean, DisposableBean {
 
     fun disconnect() {
         println("close : $url")
-    }
-
-    override fun afterPropertiesSet() {
-        connect()
-        call("초기화 연결 메시지")
-    }
-
-    override fun destroy() {
-        disconnect()
     }
 }
