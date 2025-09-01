@@ -3,7 +3,7 @@ package hello.core.scope
 import jakarta.annotation.PostConstruct
 import jakarta.annotation.PreDestroy
 import org.assertj.core.api.Assertions.assertThat
-import org.springframework.context.ApplicationContext
+import org.springframework.beans.factory.ObjectProvider
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Scope
 import kotlin.test.Test
@@ -24,14 +24,13 @@ class PrototypeProviderTest {
     }
 
     class ClientBean(
-        private val ac: ApplicationContext,
+        private val prototypeBeanProvider: ObjectProvider<PrototypeBean>
     ) {
         fun logic(): Int {
             /**
-             * ac.getBean()을 통해 항상 새로운 프로토타입 빈을 생성한다.
-             * 의존관계를 외부에서 주입받는 것이 아닌, 필요한 의존관계를 찾는 것을 Dependency Lookup(DL)이라 한다.
+             * 지정한 빈을 컨테이너에서 대신 찾아주는 DL 서비스 : ObjectProvider
              */
-            val prototypeBean = ac.getBean(PrototypeBean::class.java)
+            val prototypeBean = prototypeBeanProvider.getObject()
             prototypeBean.addCount()
             return prototypeBean.getCount()
         }
