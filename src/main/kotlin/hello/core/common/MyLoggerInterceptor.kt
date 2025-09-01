@@ -2,14 +2,13 @@ package hello.core.common
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import org.springframework.beans.factory.ObjectProvider
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
 import org.springframework.web.servlet.ModelAndView
 
 @Component
 class MyLoggerInterceptor(
-    private val myLoggerProvider: ObjectProvider<MyLogger>,
+    private val myLogger: MyLogger,
 ) : HandlerInterceptor {
 
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
@@ -32,7 +31,6 @@ class MyLoggerInterceptor(
         ex: Exception?,
     ) {
         val requestURL = request.requestURL.toString()
-        val myLogger = myLoggerProvider.getObject()
         myLogger.requestURL = requestURL
 
         myLogger.log("controller test")
